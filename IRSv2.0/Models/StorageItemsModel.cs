@@ -2,7 +2,7 @@
 
 namespace IRSv2._0.Models
 {
-    public class StorageItem
+    public class StorageItemsModel
     {
           
         [Key]
@@ -10,8 +10,8 @@ namespace IRSv2._0.Models
         public string Name { get; set; }
         public int Count { get; set; }
 
-        public StorageItem() { }
-        public StorageItem(string id, string name, int count)
+        public StorageItemsModel() { }
+        public StorageItemsModel(string id, string name, int count)
         {
             ID = id;
             Name = name;

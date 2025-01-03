@@ -2,7 +2,7 @@
 
 namespace IRSv2._0.Models
 {
-    public class ToGoOrder
+    public class ToGoOrdersModel
     {
         [Key]
         public string ID { get; set; }
@@ -10,24 +10,24 @@ namespace IRSv2._0.Models
         public string ReceiverName { get; set; }
         public string ReceiverAddress { get; set; }
         public int ReceiverPhoneNumber { get; set; }
-        public virtual List<Cook> Cooks { get; set; }
-        public virtual List<Product> Products { get; set; }
+        public virtual List<CooksModel> Cooks { get; set; }
+        public virtual List<ProductsModel> Products { get; set; }
 
-        public ToGoOrder()
+        public ToGoOrdersModel()
         {
-            Cooks = new List<Cook>();
-            Products = new List<Product>();
+            Cooks = new List<CooksModel>();
+            Products = new List<ProductsModel>();
 
         }
-        public ToGoOrder(string id, double price, string receierName, string receiverAddress, int receiverPhoneNumber)
+        public ToGoOrdersModel(string id, double price, string receierName, string receiverAddress, int receiverPhoneNumber)
         {
             ID = id;
             Price = price;
             ReceiverName = receierName;
             ReceiverAddress = receiverAddress;
             ReceiverPhoneNumber = receiverPhoneNumber;
-            Cooks = new List<Cook>();
-            Products = new List<Product>();
+            Cooks = new List<CooksModel>();
+            Products = new List<ProductsModel>();
 
         }
     }

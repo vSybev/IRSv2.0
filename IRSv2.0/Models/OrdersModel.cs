@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace IRSv2._0.Models
 {
-    public class Order
+    public class OrdersModel
     {
         [Key]
         public string ID { get; set; }
@@ -14,23 +14,23 @@ namespace IRSv2._0.Models
 
         [ForeignKey("Table")]
         public string TableID { get; set; }
-        public virtual List<Product> Products { get; set; }
-        public virtual List<Cook> Cooks { get; set; }
+        public virtual List<ProductsModel> Products { get; set; }
+        public virtual List<CooksModel> Cooks { get; set; }
 
-        public Order()
+        public OrdersModel()
         {
-            Products = new List<Product>();
-            Cooks = new List<Cook>();
+            Products = new List<ProductsModel>();
+            Cooks = new List<CooksModel>();
         }
 
-        public Order(string id, double price, string waiterID, string tableID)
+        public OrdersModel(string id, double price, string waiterID, string tableID)
         {
             ID = id;
             Price = price;
             WaiterID = waiterID;
             TableID = tableID;
-            Products = new List<Product>();
-            Cooks = new List<Cook>();
+            Products = new List<ProductsModel>();
+            Cooks = new List<CooksModel>();
         }
     }
 }

@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace IRSv2._0.Models
 {
-    public class Product
+    public class ProductsModel
     {
 
         [Key]
@@ -13,13 +13,13 @@ namespace IRSv2._0.Models
         public string Type { get; set; }
         public double Price { get; set; }
         public ProductAvailability Availability { get; set; }
-        public virtual List<StorageItem> Items { get; set; }
+        public virtual List<StorageItemsModel> Items { get; set; }
 
-        public Product()
+        public ProductsModel()
         {
-            Items = new List<StorageItem>();
+            Items = new List<StorageItemsModel>();
         }
-        public Product(string id, string name, string discripion, string type, double price, ProductAvailability availability)
+        public ProductsModel(string id, string name, string discripion, string type, double price, ProductAvailability availability)
         {
             ID = id;
             Name = name;
@@ -27,7 +27,7 @@ namespace IRSv2._0.Models
             Type = type;
             Price = price;
             Availability = availability;
-            Items = new List<StorageItem>();
+            Items = new List<StorageItemsModel>();
         }
     }
 }

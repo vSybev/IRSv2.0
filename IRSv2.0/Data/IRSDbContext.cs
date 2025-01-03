@@ -19,16 +19,16 @@ namespace IRSv2._0.Data
             optionsBuilder.UseSqlServer(@"Server=PD-VSABEV;Database=IRSDBv2.0;TrustServerCertificate=True;Trusted_Connection=True;MultipleActiveResultSets=true;");
         }
 
-        public DbSet<Cook> Cooks { get; set; }
-        public DbSet<Deliverer> Deliverers { get; set; }
-        public DbSet<Models.Host> Hosts { get; set; }
-        public DbSet<Manager> Managers { get; set; }
-        public DbSet<Order> Orders { get; set; }
-        public DbSet<Product> Products { get; set; }
-        public DbSet<StorageItem> StorageItems { get; set; }
-        public DbSet<Table> Tables { get; set; }
-        public DbSet<ToGoOrder> ToGoOrders { get; set; }
-        public DbSet<Waiter> Waiters { get; set; }
+        public DbSet<CooksModel> Cooks { get; set; }
+        public DbSet<DeliverersModel> Deliverers { get; set; }
+        public DbSet<Models.HostsModel> Hosts { get; set; }
+        public DbSet<ManagersModel> Managers { get; set; }
+        public DbSet<OrdersModel> Orders { get; set; }
+        public DbSet<ProductsModel> Products { get; set; }
+        public DbSet<StorageItemsModel> StorageItems { get; set; }
+        public DbSet<TablesModel> Tables { get; set; }
+        public DbSet<ToGoOrdersModel> ToGoOrders { get; set; }
+        public DbSet<WaitersModel> Waiters { get; set; }
 
     }
 }
