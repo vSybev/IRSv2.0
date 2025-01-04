@@ -1,4 +1,4 @@
-﻿/* General Styles for the Login Page */
+﻿/* General Styles for the Register Page */
 .container-body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -10,7 +10,7 @@
     background-color: #f8f9fa; /* Light background color */
 }
 
-.login-container {
+.register-container {
     background: white;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -19,11 +19,11 @@
     max-width: 400px;
 }
 
-    .login-container h1 {
+    .register-container h1 {
         font-size: 1.5em;
         margin-bottom: 20px;
         text-align: center;
-        color: #007bff; /* Blue color for Login heading */
+        color: #28a745; /* Green color for Register heading */
     }
 
 .form-group {
@@ -44,14 +44,14 @@
     }
 
         .form-group input:focus {
-            border-color: #007bff; /* Blue border on focus */
+            border-color: #28a745; /* Green border on focus */
             outline: none;
         }
 
     .form-group button {
         width: 100%;
         padding: 10px;
-        background: #007bff; /* Blue background for button */
+        background: #28a745; /* Green background for button */
         color: white;
         border: none;
         border-radius: 4px;
@@ -60,5 +60,5 @@
     }
 
         .form-group button:hover {
-            background: #0056b3; /* Darker blue on hover */
+            background: #218838; /* Darker green on hover */
         }
