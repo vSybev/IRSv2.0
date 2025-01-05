@@ -3,5 +3,163 @@
 *@
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="~/css/Orders.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 }
-<h1>To Go Orders</h1>
+
+<div class="container">
+    <div class="table-container">
+        <div class="table-header">
+            <h2>ToGoOrders</h2>
+            <button class="add-btn" data-bs-toggle="modal" data-bs-target="#addToGoOrderModal">
+                <i class="bi bi-plus"></i>
+            </button>
+        </div>
+        <table class="styled-table">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Count</th>
+                    <th>Type</th>
+                    <th>Address</th>
+                    <th>Phone number</th>
+                    <th>Price</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>1234</td>
+                    <td>Pizza</td>
+                    <td>2</td>
+                    <td>Food</td>
+                    <td>bul Shipka 32</td>
+                    <td>089132454342</td>
+                    <td>32.50</td>
+                    <td>Done</td>
+                    <td><button class="action-btn">Edit</button></td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>4321</td>
+                    <td>Burger</td>
+                    <td>1</td>
+                    <td>Drink</td>
+                    <td>bul Pencho Slaveikov 78</td>
+                    <td>+3592339229043</td>
+                    <td>27.43</td>
+                    <td>Not done</td>
+                    <td><button class="action-btn">Edit</button></td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>7557</td>
+                    <td>Meet balls</td>
+                    <td>2</td>
+                    <td>Food</td>
+                    <td>bul peshtera 21</td>
+                    <td>08994192291</td>
+                    <td>29.99</td>
+                    <td>Not done</td>
+                    <td><button class="action-btn">Edit</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="addToGoOrderModal" tabindex="-1" aria-labelledby="addToGoOrderModalLabel" aria-hidden="true" data-bs-backdrop="static">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addToGoOrderModalLabel">Add New ToGo Order</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <!-- Форма, която изпраща POST заявка към контролера -->
+                <form method="post" action="/ToGoOrders/AddToGoOrder">
+                    <div class="mb-3">
+                        <label for="toGoOrderId" class="form-label">ID</label>
+                        <input type="text" class="form-control" id="toGoOrderId" name="ID" placeholder="Enter ID" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="toGoOrderName" class="form-label">Name</label>
+                        <input type="text" class="form-control" id="toGoOrderName" name="Name" placeholder="Enter Name" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="toGoOrderCount" class="form-label">Count</label>
+                        <input type="number" class="form-control" id="toGoOrderCount" name="Count" placeholder="Enter Count" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="toGoOrderType" class="form-label">Type</label>
+                        <select class="form-select" id="toGoOrderType" name="Type">
+                            <option value="Food">Food</option>
+                            <option value="Drink">Drink</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="toGoOrderAddress" class="form-label">Address</label>
+                        <input type="text" class="form-control" id="toGoOrderAddress" name="Address" placeholder="Enter Address" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="toGoOrderPhoneNumber" class="form-label">PhoneNumber</label>
+                        <input type="tel" class="form-control" id="toGoOrderPhoneNumber" name="PhoneNumber" placeholder="Enter PhoneNumber" required>
+
+                    </div>
+                    <div class="mb-3">
+                        <label for="toGoOrderPrice" class="form-label">Price</label>
+                        <input type="number" class="form-control" id="toGoOrderPrice" name="Price" placeholder="Enter Price" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="toGoOrderStatus" class="form-label">Status</label>
+                        <select class="form-select" id="toGoOrderStatus" name="Status">
+                            <option value="Not done">Not done</option>
+                            <option value="Done">Done</option>
+                        </select>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Add ToGo Order</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@* <!-- Modal for ToGo Order Change of Status --> *@
+@* <div class="modal fade" id="addToGoOrderModal" tabindex="-1" aria-labelledby="addToGoOrderModalLabel" aria-hidden="true" data-bs-backdrop="static"> *@
+@*     <div class="modal-dialog"> *@
+@*         <div class="modal-content"> *@
+@*             <div class="modal-header"> *@
+@*                 <h5 class="modal-title" id="addToGoOrderModalLabel">Add New ToGo Order</h5> *@
+@*                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> *@
+@*             </div> *@
+@*             <div class="modal-body"> *@
+@*                 <!-- Форма, която изпраща POST заявка към контролера --> *@
+@*                 <form method="post" action="/ToGoOrders/AddToGoOrder"> *@
+@*                     <div class="mb-3"> *@
+@*                         <label for="toGoOrderStatusChange" class="form-label">Status</label> *@
+@*                         <select class="form-select" id="toGoOrderStatusChange" name="StatusChange"> *@
+@*                             <option value="Done">Done</option> *@
+@*                             <option value="Not done">Not done</option> *@
+@*                         </select> *@
+@*                     </div> *@
+@*                     <div class="modal-footer"> *@
+@*                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> *@
+@*                         <button type="submit" class="btn btn-primary">Add ToGo Order</button> *@
+@*                     </div> *@
+@*                 </form> *@
+@*             </div> *@
+@*         </div> *@
+@*     </div> *@
+@* </div> *@
