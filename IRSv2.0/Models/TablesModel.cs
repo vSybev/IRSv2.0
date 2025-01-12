@@ -13,6 +13,9 @@ namespace IRSv2._0.Models
         public string OrderId { get; set; }
         public virtual OrdersModel Order { get; set; }
 
+    
+
+
         public TablesModel()
         {
         }
@@ -22,5 +25,7 @@ namespace IRSv2._0.Models
             Status = status;
             Order = new OrdersModel();
         }
+
+        
     }
 }

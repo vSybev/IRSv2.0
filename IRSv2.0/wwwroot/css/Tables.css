@@ -1,5 +1,4 @@
-﻿/* Main Container with Light Pastel Background */
-.circle-container {
+﻿.circle-container {
     position: relative;
     width: 100%;
     max-width: 900px;
@@ -15,7 +14,6 @@
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.05);
 }
 
-/* Buttons with Pastel Blue */
 .circle-btn {
     position: absolute;
     width: 125px;
@@ -34,7 +32,6 @@
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
 }
 
-/* Hover Effect */
 .circle-btn:hover {
     background: #017eff;
     transform: scale(1.1);
@@ -46,7 +43,6 @@
     box-shadow: inset 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-/* Button Positions */
 .circle-btn:nth-child(1) {
     top: 15%;
     left: 20%;
@@ -73,7 +69,6 @@
     transform: translate(-50%, -50%);
 }
 
-/* Label Box */
 .label-box {
     position: absolute;
     bottom: 5%;
@@ -85,4 +80,26 @@
     font-size: 31px;
     font-weight: bold;
     color: #555;
+}
+
+
+
+
+
+.modal {
+/*    background-color: black;*/
+}
+.modal-dialog {
+    max-width: 80%!important;
+    background-color: green;
+}
+
+.modal-content {
+/*    background-color: yellow;*/
+}
+
+.modal-body {
+    /*    background-color: blue;*/
+    max-width: 100% !important;
+    margin-bottom: 100px;
 }

@@ -1,7 +1,4 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
+﻿@{
     Layout = "~/Views/Shared/_Layout.cshtml";
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
@@ -81,85 +78,119 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="addToGoOrderModalLabel">Add New ToGo Order</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <h5 class="modal-title" 
+                    id="addToGoOrderModalLabel">
+                  Add New ToGo Order
+                </h5>
+                <button type="button"
+                        class="btn-close" 
+                        data-bs-dismiss="modal" 
+                        aria-label="Close">
+                </button>
             </div>
             <div class="modal-body">
-                <!-- Форма, която изпраща POST заявка към контролера -->
                 <form method="post" action="/ToGoOrders/AddToGoOrder">
                     <div class="mb-3">
                         <label for="toGoOrderId" class="form-label">ID</label>
-                        <input type="text" class="form-control" id="toGoOrderId" name="ID" placeholder="Enter ID" required>
+                        <input type="text" 
+                               class="form-control" 
+                               id="toGoOrderId" 
+                               name="ID" 
+                               placeholder="Enter..." 
+                               required>
                     </div>
                     <div class="mb-3">
-                        <label for="toGoOrderName" class="form-label">Name</label>
-                        <input type="text" class="form-control" id="toGoOrderName" name="Name" placeholder="Enter Name" required>
+                        <label for="toGoOrderName" 
+                               class="form-label">
+                            Name</label>
+                        <input type="text" 
+                               class="form-control" 
+                               id="toGoOrderName" 
+                               name="Name" 
+                               placeholder="Enter..." 
+                               required>
                     </div>
                     <div class="mb-3">
-                        <label for="toGoOrderCount" class="form-label">Count</label>
-                        <input type="number" class="form-control" id="toGoOrderCount" name="Count" placeholder="Enter Count" required>
+                        <label for="toGoOrderCount" 
+                               class="form-label">
+                            Count</label>
+                        <input type="number" 
+                               class="form-control" 
+                               id="toGoOrderCount" 
+                               name="Count" 
+                               placeholder="Enter..." 
+                               required>
                     </div>
                     <div class="mb-3">
-                        <label for="toGoOrderType" class="form-label">Type</label>
-                        <select class="form-select" id="toGoOrderType" name="Type">
+                        <label for="toGoOrderType" 
+                               class="form-label">
+                            Type</label>
+                        <select class="form-select" 
+                                id="toGoOrderType"
+                                name="Type">
                             <option value="Food">Food</option>
                             <option value="Drink">Drink</option>
                         </select>
                     </div>
                     <div class="mb-3">
-                        <label for="toGoOrderAddress" class="form-label">Address</label>
-                        <input type="text" class="form-control" id="toGoOrderAddress" name="Address" placeholder="Enter Address" required>
+                        <label for="toGoOrderAddress"
+                               class="form-label">
+                            Address</label>
+                        <input type="text" 
+                               class="form-control" 
+                               id="toGoOrderAddress" 
+                               name="Address" 
+                               placeholder="Enter..." 
+                               required>
                     </div>
                     <div class="mb-3">
-                        <label for="toGoOrderPhoneNumber" class="form-label">PhoneNumber</label>
-                        <input type="tel" class="form-control" id="toGoOrderPhoneNumber" name="PhoneNumber" placeholder="Enter PhoneNumber" required>
+                        <label for="toGoOrderPhoneNumber" 
+                               class="form-label">
+                            Phone number</label>
+                        <input type="tel" 
+                               class="form-control" 
+                               id="toGoOrderPhoneNumber" 
+                               name="PhoneNumber" 
+                               placeholder="Enter..." 
+                               required>
 
                     </div>
                     <div class="mb-3">
-                        <label for="toGoOrderPrice" class="form-label">Price</label>
-                        <input type="number" class="form-control" id="toGoOrderPrice" name="Price" placeholder="Enter Price" required>
+                        <label for="toGoOrderPrice" 
+                               class="form-label">
+                            Price</label>
+                        <input type="number" 
+                               class="form-control" 
+                               id="toGoOrderPrice" 
+                               name="Price" 
+                               placeholder="Enter..." 
+                               required>
                     </div>
                     <div class="mb-3">
-                        <label for="toGoOrderStatus" class="form-label">Status</label>
-                        <select class="form-select" id="toGoOrderStatus" name="Status">
+                        <label for="toGoOrderStatus" 
+                               class="form-label">
+                            Status</label>
+                        <select class="form-select" 
+                                id="toGoOrderStatus" 
+                                name="Status">
                             <option value="Not done">Not done</option>
                             <option value="Done">Done</option>
                         </select>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Add ToGo Order</button>
+                        <button type="button"
+                                class="btn btn-secondary" 
+                                data-bs-dismiss="modal">
+                            Close
+                        </button>
+                        <button type="submit" 
+                                class="btn btn-primary" 
+                                data-bs-dismiss="modal">
+                            Add ToGo Order
+                        </button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
 </div>
-
-@* <!-- Modal for ToGo Order Change of Status --> *@
-@* <div class="modal fade" id="addToGoOrderModal" tabindex="-1" aria-labelledby="addToGoOrderModalLabel" aria-hidden="true" data-bs-backdrop="static"> *@
-@*     <div class="modal-dialog"> *@
-@*         <div class="modal-content"> *@
-@*             <div class="modal-header"> *@
-@*                 <h5 class="modal-title" id="addToGoOrderModalLabel">Add New ToGo Order</h5> *@
-@*                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> *@
-@*             </div> *@
-@*             <div class="modal-body"> *@
-@*                 <!-- Форма, която изпраща POST заявка към контролера --> *@
-@*                 <form method="post" action="/ToGoOrders/AddToGoOrder"> *@
-@*                     <div class="mb-3"> *@
-@*                         <label for="toGoOrderStatusChange" class="form-label">Status</label> *@
-@*                         <select class="form-select" id="toGoOrderStatusChange" name="StatusChange"> *@
-@*                             <option value="Done">Done</option> *@
-@*                             <option value="Not done">Not done</option> *@
-@*                         </select> *@
-@*                     </div> *@
-@*                     <div class="modal-footer"> *@
-@*                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> *@
-@*                         <button type="submit" class="btn btn-primary">Add ToGo Order</button> *@
-@*                     </div> *@
-@*                 </form> *@
-@*             </div> *@
-@*         </div> *@
-@*     </div> *@
-@* </div> *@

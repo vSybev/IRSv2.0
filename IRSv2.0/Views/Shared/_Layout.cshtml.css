@@ -1,5 +1,4 @@
-﻿/* Общи стилове за хедъра */
-.navbar-brand {
+﻿.navbar-brand {
     white-space: nowrap;
     text-align: center;
     word-break: break-word;
@@ -11,9 +10,9 @@
     font-size: 1.1rem;
 }
 
-    .navbar-nav .nav-link:hover {
-        color: #0056b3;
-    }
+.navbar-nav .nav-link:hover {
+    color: #0056b3;
+}
 
 .navbar-nav .dropdown-menu {
     background-color: #ffffff;
@@ -25,12 +24,11 @@
     color: #333333;
 }
 
-    .dropdown-menu .dropdown-item:hover {
-        background-color: #f8f9fa;
-        color: #0077cc;
-    }
+.dropdown-menu .dropdown-item:hover {
+    background-color: #f8f9fa;
+    color: #0077cc;
+}
 
-/* Бутон за вход */
 .navbar-nav .nav-link .bi-box-arrow-in-right {
     color: #0077cc;
 }
@@ -39,14 +37,12 @@
     color: #0056b3;
 }
 
-/* Разположение на Waiter текста */
 .navbar-nav.ms-auto .nav-link {
     font-weight: bold;
     color: #333;
     font-size: 1.25rem;
 }
 
-/* Основни стилове за box-shadow и граници */
 .box-shadow {
     box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
 }
@@ -55,7 +51,6 @@
     border-bottom: 1px solid #e5e5e5;
 }
 
-/* Мобилен изглед */
 .navbar-toggler {
     border: none;
 }
@@ -65,7 +60,6 @@
     border-radius: 50%;
 }
 
-/* Футър стилове */
 .footer {
     position: absolute;
     bottom: 0;
