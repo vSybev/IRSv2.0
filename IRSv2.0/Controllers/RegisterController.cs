@@ -1,6 +1,5 @@
 ﻿using IRSv2._0.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.DotNet.Scaffolding.Shared.Messaging;
 
 namespace IRSv2._0.Controllers
 {
@@ -13,17 +12,27 @@ namespace IRSv2._0.Controllers
         }
 
         [HttpPost]
-        public IActionResult Register(RegisterModel model) {
-            if(model.Id == "aa")
+        public IActionResult Register(RegisterModel model)
+        {
+            if (!ModelState.IsValid)
             {
-            return RedirectToAction("Orders", "Orders");
-
+                // Ако моделът не е валиден, върни същото View с грешки
+                return View(model);
             }
-            else if(model.Id == "bb")
+
+            // Логика за обработка на регистрацията
+            if (model.Id == "aa")
+            {
+                return RedirectToAction("Orders", "Orders");
+            }
+            else if (model.Id == "bb")
             {
                 return RedirectToAction("ToGoOrders", "ToGoOrders");
             }
-            return RedirectToAction("Index", "Home");
+
+            // За демонстрация - съобщение за успешна регистрация
+            ViewBag.Message = "User registered successfully!";
+            return View();
         }
     }
 }
