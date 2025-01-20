@@ -6,7 +6,7 @@ namespace IRSv2._0.Data
 {
     public class IRSDbContext:DbContext
     {
-        private readonly string _connectionString;
+        private readonly string? _connectionString;
 
         /*public IRSDbContext(DbContextOptions<IRSDbContext> options, IConfiguration configuration)
             : base(options)
@@ -29,6 +29,5 @@ namespace IRSv2._0.Data
         public DbSet<TablesModel> Tables { get; set; }
         public DbSet<ToGoOrdersModel> ToGoOrders { get; set; }
         public DbSet<WaitersModel> Waiters { get; set; }
-
     }
 }

@@ -1,10 +1,13 @@
-﻿using IRSv2._0.Models;
+﻿using IRSv2._0.Data;
+using IRSv2._0.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace IRSv2._0.Controllers
 {
     public class RegisterController : Controller
     {
+        private readonly IRSDbContext _context;
+
         [HttpGet]
         public IActionResult Register()
         {
@@ -20,15 +23,29 @@ namespace IRSv2._0.Controllers
                 return View(model);
             }
 
-            // Логика за обработка на регистрацията
-            if (model.Id == "aa")
+            switch (model.Position.ToLower())
             {
-                return RedirectToAction("Orders", "Orders");
-            }
-            else if (model.Id == "bb")
-            {
-                return RedirectToAction("ToGoOrders", "ToGoOrders");
-            }
+                case "manager": 
+                    Console.WriteLine("Manager");
+                    RedirectToAction("Orders", "Orders");
+                    break;
+                case "waiter": 
+                    Console.WriteLine("waiter");
+                    RedirectToAction("Orders", "Orders");
+                    break;
+                case "host": 
+                    Console.WriteLine("host");
+                    RedirectToAction("Orders", "Orders");
+                    break;
+                case "cook": 
+                    Console.WriteLine("cook");
+                    RedirectToAction("Orders", "Orders");
+                    break;
+                case "deliverer": 
+                    Console.WriteLine("deliverer");
+                    RedirectToAction("Orders", "Orders");
+                    break;
+            } 
 
             // За демонстрация - съобщение за успешна регистрация
             ViewBag.Message = "User registered successfully!";

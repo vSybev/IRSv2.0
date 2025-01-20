@@ -14,24 +14,36 @@ namespace IRSv2._0.Controllers
         [HttpPost]
         public IActionResult Login(LoginModel model)
         {
+            char positionLetter = char.ToUpper(model.Id.ToString()[0]);
+            int idNumber = int.Parse(model.Id.Substring(1));
+
             if (!ModelState.IsValid)
             {
-                // Връща изгледа със съобщения за грешки, ако моделът не е валиден
+                // Ако моделът не е валиден, върни същото View с грешки
                 return View(model);
             }
 
-            // Логика за проверка на потребителя
-            if (model.Id == "aa")
+            switch (positionLetter)
             {
-                return RedirectToAction("Orders", "Orders");
-            }
-            else if (model.Id == "bb")
-            {
-                return RedirectToAction("ToGoOrders", "ToGoOrders");
+                case 'M':
+                    RedirectToAction("Orders", "Orders");
+                    break;
+                case 'S':
+                    RedirectToAction("Orders", "Orders");
+                    break;
+                case 'C':
+                    RedirectToAction("Orders", "Orders");
+                    break;
+                case 'H':
+                    RedirectToAction("Orders", "Orders");
+                    break;
+                case 'D':
+                    RedirectToAction("Orders", "Orders");
+                    break;
             }
 
-            // Ако ID-то е грешно, върнете съобщение за грешка
-            ViewBag.ErrorMessage = "Invalid ID. Please try again.";
+            // За демонстрация - съобщение за успешна регистрация
+            ViewBag.Message = "User registered successfully!";
             return View();
         }
     }
