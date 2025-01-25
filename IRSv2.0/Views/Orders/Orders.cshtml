@@ -29,53 +29,34 @@
                     <th>Action</th>
                 </tr>
             </thead>
-            <tbody>
-                @* @foreach (OrdersModel order in Model.Orders) *@
-                @* { *@
-                @*     <tr> *@
-                @*         <td>@order.ID</td> *@
-                @*         <td>@order.Price</td> *@
-                @*         <td>@order.WaiterID</td> *@
-                @*         <td>@order.TableID</td> *@
-                @*         <td> *@
-                @*             @foreach (OrdersModel product in @order.Products) *@
-                @*             { *@
-                @*                 <div>@product</div> *@
-                @*             } *@
-                @*         </td> *@
-                @*         <td> *@
-                @*             @foreach (OrdersModel cook in @order.Cooks) *@
-                @*             { *@
-                @*                 <div>@cook</div> *@
-                @*             } *@
-                @*         </td> *@
-                        @* ID = id; *@
-                        @* Price = price; *@
-                        @* WaiterID = waiterID; *@
-                        @* TableID = tableID; *@
-                        @* Products = new List *@
-                        @* Cooks = new List<CooksModel>(); *@
-                @*     </tr> *@
-                @* } *@
-                <tr>
-                    <td>2</td>
-                    <td>4321</td>
-                    <td>Мусака</td>
-                    <td>1</td>
-                    <td>Drink</td>
-                    <td>Not done</td>
-                    <td><button class="action-btn">Edit</button></td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td>7557</td>
-                    <td>Таратор</td>
-                    <td>2</td>
-                    <td>Food</td>
-                    <td>Not done</td>
-                    <td><button class="action-btn">Edit</button></td>
-                </tr>
-            </tbody>
+            @* <tbody>
+
+               @foreach (var order in Model.Orders)
+                {
+                    <tr>
+                        <td>@order.ID</td>
+                        <td>@order.TableID</td>
+                        <td>@order.WaiterID</td>
+                        <td>@order.CookNames</td>
+                        <td>@order.Price</td>
+                        <td>
+                            @foreach (var product in order.Products)
+                            {
+                                <span>@product.Name</span>
+                                <br />
+                            }
+                        </td>
+                        <td>
+                            <form method="post" action="/Orders/DeleteOrder" onsubmit="return confirm('Are you sure you want to mark this order as done?');">
+                                <input type="hidden" name="id" value="@order.ID" />
+                                <button type="submit" class="btn btn-success">
+                                    Done
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody> *@
         </table>
     </div>
 </div>

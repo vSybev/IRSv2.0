@@ -10,7 +10,23 @@ namespace IRSv2._0.Controllers
     public class OrdersController : Controller
     {
         private readonly IRSDbContext _context;
+        OrdersModel order1 = new OrdersModel
+        {
+            ID = "Order1",
+            TableID = "1",
+            WaiterID = "1",
+            Cooks = new List<CooksModel>
+    {
+        new CooksModel { ID = "C1", Name = "Cook1" },
 
+    },
+            Price = 10,
+            Products = new List<ProductsModel>
+    {
+        new ProductsModel { ID = "P1", Name = "Product1" },
+        new ProductsModel { ID = "P2", Name = "Product2" }
+    }
+        };
         public OrdersController()
         {
             _context = new IRSDbContext();
@@ -20,7 +36,7 @@ namespace IRSv2._0.Controllers
         public IActionResult Orders()
         {
             //var orders = _context.Orders.ToList();
-
+            _context.Orders.Add(order1);
             ////test za izpiswane na poruchki w kozolata
             //foreach (var order in orders)
             //{

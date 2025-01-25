@@ -32,5 +32,7 @@ namespace IRSv2._0.Models
             Products = new List<ProductsModel>();
             Cooks = new List<CooksModel>();
         }
+
+        public string CookNames => string.Join(", ", Cooks.Select(c => c.Name));
     }
 }
