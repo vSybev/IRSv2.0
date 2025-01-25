@@ -30,33 +30,33 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (OrdersModel order in Model.Orders)
-                {
-                    <tr>
-                        <td>@order.ID</td>
-                        <td>@order.Price</td>
-                        <td>@order.WaiterID</td>
-                        <td>@order.TableID</td>
-                        @* <td> *@
-                        @*     @foreach (OrdersModel product in @order.Products) *@
-                        @*     { *@
-                        @*         <div>@product</div> *@
-                        @*     } *@
-                        @* </td> *@
-                        @* <td> *@
-                        @*     @foreach (OrdersModel cook in @order.Cooks) *@
-                        @*     { *@
-                        @*         <div>@cook</div> *@
-                        @*     } *@
-                        @* </td> *@
+                @* @foreach (OrdersModel order in Model.Orders) *@
+                @* { *@
+                @*     <tr> *@
+                @*         <td>@order.ID</td> *@
+                @*         <td>@order.Price</td> *@
+                @*         <td>@order.WaiterID</td> *@
+                @*         <td>@order.TableID</td> *@
+                @*         <td> *@
+                @*             @foreach (OrdersModel product in @order.Products) *@
+                @*             { *@
+                @*                 <div>@product</div> *@
+                @*             } *@
+                @*         </td> *@
+                @*         <td> *@
+                @*             @foreach (OrdersModel cook in @order.Cooks) *@
+                @*             { *@
+                @*                 <div>@cook</div> *@
+                @*             } *@
+                @*         </td> *@
                         @* ID = id; *@
                         @* Price = price; *@
                         @* WaiterID = waiterID; *@
                         @* TableID = tableID; *@
                         @* Products = new List *@
                         @* Cooks = new List<CooksModel>(); *@
-                    </tr>
-                }
+                @*     </tr> *@
+                @* } *@
                 <tr>
                     <td>2</td>
                     <td>4321</td>

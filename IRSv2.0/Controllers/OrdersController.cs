@@ -19,14 +19,14 @@ namespace IRSv2._0.Controllers
         // GET: Orders
         public IActionResult Orders()
         {
-            var orders = _context.Orders.ToList();
+            //var orders = _context.Orders.ToList();
 
-            //test za izpiswane na poruchki w kozolata
-            foreach (var order in orders)
-            {
-                Console.WriteLine(order.ID);
-            }
-            return View(orders);
+            ////test za izpiswane na poruchki w kozolata
+            //foreach (var order in orders)
+            //{
+            //    Console.WriteLine(order.ID);
+            //}
+            return View();
             //return View();
         }
 
