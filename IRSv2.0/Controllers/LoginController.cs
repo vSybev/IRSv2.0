@@ -68,33 +68,72 @@ namespace IRSv2._0.Controllers
                 case 'M':
                     return doesManagerExists();                   
                 case 'C':
+                    return doesCookExists();
                 case 'H':
+                    return doesHostExists();
                 case 'D':
+                    return doesDelivererExists();
                 case 'W':
-                    //return RedirectToAction("Orders", "Orders");
+                    return doesWaiterExists();
                 default:
                     ModelState.AddModelError("Id", "Invalid ID. The first letter must be W, M, C, H, or D.");
                     return View(model);
             }
 
-             IActionResult doesManagerExists()
+            IActionResult doesManagerExists()
              {
                 isValidUser = _context.Managers.Any(m => m.ID == model.Id);
                 if (isValidUser)
                 {
-                    Console.WriteLine("manager logged in");
                     return RedirectToAction("Orders", "Orders");
                 }
-                Console.WriteLine("ne stana brat");
                 ModelState.AddModelError("Id", "This user does not exists");
                 return View();
              }
 
             IActionResult doesCookExists()
+             {
+                isValidUser = _context.Cooks.Any(c => c.ID == model.Id);
+                if (isValidUser)
+                {
+                    return RedirectToAction("Orders", "Orders");
+                }
+                ModelState.AddModelError("Id", "This user does not exists");
+                return View();
+             }
+
+            IActionResult doesHostExists()
             {
+                isValidUser = _context.Hosts.Any(h => h.ID == model.Id);
+                if (isValidUser)
+                {
+                    return RedirectToAction("Orders", "Orders");
+                }
+                ModelState.AddModelError("Id", "This user does not exists");
                 return View();
             }
 
+            IActionResult doesDelivererExists()
+            {
+                isValidUser = _context.Deliverers.Any(d => d.ID == model.Id);
+                if (isValidUser)
+                {
+                    return RedirectToAction("Orders", "Orders");
+                }
+                ModelState.AddModelError("Id", "This user does not exists");
+                return View();
+            }
+
+            IActionResult doesWaiterExists()
+            {
+                isValidUser = _context.Waiters.Any(w => w.ID == model.Id);
+                if (isValidUser)
+                {
+                    return RedirectToAction("Orders", "Orders");
+                }
+                ModelState.AddModelError("Id", "This user does not exists");
+                return View();
+            }
         }
     }
 }
