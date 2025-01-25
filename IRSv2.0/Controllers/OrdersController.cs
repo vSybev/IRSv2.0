@@ -3,24 +3,31 @@ using Microsoft.AspNetCore.Mvc;
 using IRSv2._0.Data.Contexts;
 using System.Linq;
 using System.Collections.Generic;
+using IRSv2._0.Data;
 
 namespace IRSv2._0.Controllers
 {
     public class OrdersController : Controller
     {
-        private readonly OrderContext _context;
+        private readonly IRSDbContext _context;
 
-        public OrdersController(OrderContext context)
+        public OrdersController()
         {
-            _context = context;
+            _context = new IRSDbContext();
         }
 
         // GET: Orders
         public IActionResult Orders()
         {
-            //var orders = _context.Orders.ToList();
-            //return View(orders);
-            return View();
+            var orders = _context.Orders.ToList();
+
+            //test za izpiswane na poruchki w kozolata
+            foreach (var order in orders)
+            {
+                Console.WriteLine(order.ID);
+            }
+            return View(orders);
+            //return View();
         }
 
         // GET: Orders/Details/{id}

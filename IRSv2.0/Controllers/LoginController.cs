@@ -1,10 +1,20 @@
-﻿using IRSv2._0.Models;
+﻿using IRSv2._0.Data;
+using IRSv2._0.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages;
 
 namespace IRSv2._0.Controllers
 {
     public class LoginController : Controller
     {
+        private readonly IRSDbContext _context;
+
+        public LoginController()
+        {
+            _context = new IRSDbContext();
+        }
+
         [HttpGet]
         public IActionResult Login()
         {
@@ -52,22 +62,39 @@ namespace IRSv2._0.Controllers
             }
 
             // Обработка на валиден вход според буквата
+            var isValidUser = false;
             switch (positionLetter)
             {
                 case 'M':
+                    return doesManagerExists();                   
                 case 'C':
                 case 'H':
                 case 'D':
                 case 'W':
-                    return RedirectToAction("Orders", "Orders");
+                    //return RedirectToAction("Orders", "Orders");
                 default:
                     ModelState.AddModelError("Id", "Invalid ID. The first letter must be W, M, C, H, or D.");
                     return View(model);
             }
 
-            // Демонстрационно съобщение за успешно логване
-            ViewBag.Message = "User loged successfully!";
-            return View();
+             IActionResult doesManagerExists()
+             {
+                isValidUser = _context.Managers.Any(m => m.ID == model.Id);
+                if (isValidUser)
+                {
+                    Console.WriteLine("manager logged in");
+                    return RedirectToAction("Orders", "Orders");
+                }
+                Console.WriteLine("ne stana brat");
+                ModelState.AddModelError("Id", "This user does not exists");
+                return View();
+             }
+
+            IActionResult doesCookExists()
+            {
+                return View();
+            }
+
         }
     }
 }
