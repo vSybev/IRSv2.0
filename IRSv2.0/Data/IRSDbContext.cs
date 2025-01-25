@@ -16,9 +16,7 @@ namespace IRSv2._0.Data
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            //optionsBuilder.UseSqlServer(@"Server=PD-VSABEV;Database=IRSDBv2.0;TrustServerCertificate=True;Trusted_Connection=True;MultipleActiveResultSets=true;");
-            optionsBuilder.UseSqlServer(@"Server=DESKTOP-2T34TGN;Database=IRSDBv2.0;TrustServerCertificate=True;Trusted_Connection=True;MultipleActiveResultSets=true;");
-
+            optionsBuilder.UseSqlServer(@"Server=DESKTOP-1KLCRTE;Database=IRSDBv2.0;TrustServerCertificate=True;Trusted_Connection=True;MultipleActiveResultSets=true;");
         }
 
         public DbSet<CooksModel> Cooks { get; set; }
