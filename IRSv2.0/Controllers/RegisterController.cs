@@ -6,7 +6,7 @@ namespace IRSv2._0.Controllers
 {
     public class RegisterController : Controller
     {
-        private readonly IRSDbContext? _context;
+        /*private readonly IRSDbContext _context;
 
         [HttpGet]
         public IActionResult Register()
@@ -15,63 +15,282 @@ namespace IRSv2._0.Controllers
         }
 
         [HttpPost]
-        public IActionResult Register(RegisterModel model)
+        public ActionResult Register(RegisterModel model)
         {
-            // Проверка дали Id е празно или null
-            if (string.IsNullOrWhiteSpace(model.Id))
-            {
-                ModelState.AddModelError("Id", "ID cannot be empty.");
-                return View(model);
-            }
-
-            // Проверка дали дължината на Id е поне 2 символа
-            if (model.Id.Length < 2)
-            {
-                ModelState.AddModelError("Id", "ID must be at least 2 characters long.");
-                return View(model);
-            }
-
-            // Проверка дали първият символ е буква
-            if (!char.IsLetter(model.Id[0]))
-            {
-                ModelState.AddModelError("Id", "The first character of the ID must be a letter.");
-                return View(model);
-            }
-
-            // Опит за извличане на числото след първия символ
-            if (!int.TryParse(model.Id.Substring(1), out int idNumber))
-            {
-                ModelState.AddModelError("Id", "The part of the ID after the first letter must be a number.");
-                return View(model);
-            }
-
-            // Преобразуване на първата буква до главна
-            char positionLetter = char.ToUpper(model.Id[0]);
-
-            // Проверка дали ModelState е валиден (допълнителна валидация)
             if (!ModelState.IsValid)
             {
                 return View(model);
             }
 
-            // Обработка на валиден вход според буквата
-            switch (positionLetter)
+            try
             {
-                case 'M':
-                case 'S':
-                case 'C':
-                case 'H':
-                case 'D':
-                case 'W':
-                    return RedirectToAction("Orders", "Orders");
-                default:
-                    ModelState.AddModelError("Id", "Invalid ID. The first letter must be W, M, S, C, H, or D.");
-                    return View(model);
+                switch (model.Position.ToLower())
+                {
+                    case "manager":
+                        CreateManager(model);
+                        break;
+                    case "cook":
+                        CreateCook(model);
+                        break;
+                    case "waiter":
+                        CreateWaiter(model);
+                        break;
+                    case "deliverer":
+                        CreateDeliverer(model);
+                        break;
+                    case "host":
+                        CreateHost(model);
+                        break;
+                    default:
+                        ModelState.AddModelError("Role", "Invalid role selected.");
+                        return View(model);
+                }
+
+                // Assuming success redirects to a dashboard or home page
+                return RedirectToAction("Index", "Home");
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("", $"An error occurred: {ex.Message}");
+                return View(model);
+            }
+        }
+
+        private void CreateManager(RegisterModel model)
+        {
+            // Create a new ManagersModel instance
+            ManagersModel manager = new ManagersModel
+            {
+                ID = model.Id, // Generate a unique ID
+                Name = model.Name,
+                Waiters = new List<WaitersModel>(),
+                Cooks = new List<CooksModel>(),
+                Hosts = new List<HostsModel>(),
+                Deliverers = new List<DeliverersModel>()
+            };
+
+            // Save manager to the database (pseudo-code, replace with actual ORM logic)
+            using (var context = new IRSDbContext())
+            {
+                context.Managers.Add(manager);
+                context.SaveChanges();
+            }
+        }
+
+        private void CreateCook(RegisterModel model)
+        {
+            // Create a new CooksModel instance
+            CooksModel cook = new CooksModel
+            {
+                ID = model.Id, // Generate a unique ID
+                Name = model.Name,
+                Orders = new List<OrdersModel>(),
+                ToGoOrders = new List<ToGoOrdersModel>()
+            };
+
+            // Save cook to the database (pseudo-code, replace with actual ORM logic)
+            using (var context = new IRSDbContext())
+            {
+                context.Cooks.Add(cook);
+                context.SaveChanges();
+            }
+        }
+
+        private void CreateWaiter(RegisterModel model)
+        {
+            // Create a new WaitersModel instance
+            WaitersModel waiter = new WaitersModel
+            {
+                ID = model.Id, // Generate a unique ID
+                Name = model.Name,
+                OnWork = false, // Default to false when created
+                Sector = new List<TablesModel>(),
+                Orders = new List<OrdersModel>()
+            };
+
+            // Save waiter to the database (pseudo-code, replace with actual ORM logic)
+            using (var context = new IRSDbContext())
+            {
+                context.Waiters.Add(waiter);
+                context.SaveChanges();
+            }
+        }
+
+        private void CreateDeliverer(RegisterModel model)
+        {
+            // Create a new DeliverersModel instance
+            DeliverersModel deliverer = new DeliverersModel
+            {
+                ID = model.Id, // Generate a unique ID
+                Name = model.Name,
+                ToGoOrders = new List<ToGoOrdersModel>()
+            };
+
+            // Save deliverer to the database (pseudo-code, replace with actual ORM logic)
+            using (var context = new IRSDbContext())
+            {
+                context.Deliverers.Add(deliverer);
+                context.SaveChanges();
+            }
+        }
+
+        private void CreateHost(RegisterModel model)
+        {
+            // Create a new HostsModel instance
+            HostsModel host = new HostsModel
+            {
+                ID = model.Id, // Generate a unique ID
+                Name = model.Name,
+                Sector = new List<TablesModel>(),
+                ToGoOrders = new List<ToGoOrdersModel>()
+            };
+
+            // Save host to the database (pseudo-code, replace with actual ORM logic)
+            using (var context = new IRSDbContext())
+            {
+                context.Hosts.Add(host);
+                context.SaveChanges();
+            }
+        }*/
+            private readonly IRSDbContext _context;
+
+            public RegisterController()
+            {
+                _context = new IRSDbContext();
             }
 
-            // Демонстрационно съобщение за успешна регистрация
-            ViewBag.Message = "User registered successfully!";
-            return View();
+            public ActionResult Register()
+            {
+                return View();
+            }
+
+            [HttpPost]
+            public ActionResult Register(RegisterModel model)
+            {
+                if (!ModelState.IsValid)
+                {
+                    return View(model);
+                }
+
+                try
+                {
+                    switch (model.Position.ToLower())
+                    {
+                        case "manager":
+                            CreateManager(model);
+                        Console.WriteLine("manager registered successfully");
+                            break;
+                        case "cook":
+                            CreateCook(model);
+                        Console.WriteLine("cook registered successfully");
+                        break;
+                        case "waiter":
+                            CreateWaiter(model);
+                        Console.WriteLine("waiter registered successfully");
+                        break;
+                        case "deliverer":
+                            CreateDeliverer(model);
+                        Console.WriteLine("deliverer registered successfully");
+                        break;
+                        case "host":
+                            CreateHost(model);
+                        Console.WriteLine("host registered successfully");
+                        break;
+                        default:
+                            ModelState.AddModelError("Position", "Invalid position selected.");
+                            return View(model);
+                    }
+
+                    // Assuming success redirects to a dashboard or home page
+                    return RedirectToAction("Index", "Home");
+                }
+                catch (Exception ex)
+                {
+                    ModelState.AddModelError("", $"An error occurred: {ex.Message}");
+                    return View(model);
+                }
+            }
+
+            private void CreateManager(RegisterModel model)
+            {
+                // Create a new ManagersModel instance
+                ManagersModel manager = new ManagersModel
+                {
+                    ID = model.Id, // Use the provided ID
+                    Name = model.Name,
+                    Waiters = new List<WaitersModel>(),
+                    Cooks = new List<CooksModel>(),
+                    Hosts = new List<HostsModel>(),
+                    Deliverers = new List<DeliverersModel>()
+                };
+
+                // Save manager to the database
+                _context.Managers.Add(manager);
+                _context.SaveChanges();
+            }
+
+            private void CreateCook(RegisterModel model)
+            {
+                // Create a new CooksModel instance
+                CooksModel cook = new CooksModel
+                {
+                    ID = model.Id, // Use the provided ID
+                    Name = model.Name,
+                    Orders = new List<OrdersModel>(),
+                    ToGoOrders = new List<ToGoOrdersModel>()
+                };
+
+                // Save cook to the database
+                _context.Cooks.Add(cook);
+                _context.SaveChanges();
+            }
+
+            private void CreateWaiter(RegisterModel model)
+            {
+                // Create a new WaitersModel instance
+                WaitersModel waiter = new WaitersModel
+                {
+                    ID = model.Id, // Use the provided ID
+                    Name = model.Name,
+                    OnWork = true, // Default to true when created
+                    Sector = new List<TablesModel>(),
+                    Orders = new List<OrdersModel>()
+                };
+
+                // Save waiter to the database
+                _context.Waiters.Add(waiter);
+                _context.SaveChanges();
+            }
+
+            private void CreateDeliverer(RegisterModel model)
+            {
+                // Create a new DeliverersModel instance
+                DeliverersModel deliverer = new DeliverersModel
+                {
+                    ID = model.Id, // Use the provided ID
+                    Name = model.Name,
+                    ToGoOrders = new List<ToGoOrdersModel>()
+                };
+
+                // Save deliverer to the database
+                _context.Deliverers.Add(deliverer);
+                _context.SaveChanges();
+            }
+
+            private void CreateHost(RegisterModel model)
+            {
+                // Create a new HostsModel instance
+                HostsModel host = new HostsModel
+                {
+                    ID = model.Id, // Use the provided ID
+                    Name = model.Name,
+                    Sector = new List<TablesModel>(),
+                    ToGoOrders = new List<ToGoOrdersModel>()
+                };
+
+                // Save host to the database
+                _context.Hosts.Add(host);
+                _context.SaveChanges();
+            }
         }
-    }
 }

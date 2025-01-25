@@ -1,8 +1,13 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using IRSv2._0.Data;
+using IRSv2._0.Models;
+using Microsoft.AspNetCore.Mvc;
 using IRSv2._0.Models;
 using IRSv2._0.Data.Contexts;
 using System.Linq;
 using System.Collections.Generic;
+using Microsoft.EntityFrameworkCore;
+using System.Net;
+
 
 namespace IRSv2._0.Controllers
 {
