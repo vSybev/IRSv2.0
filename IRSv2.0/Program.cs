@@ -1,3 +1,4 @@
+using IRSv2._0.Data;
 using IRSv2._0.Data.Contexts;
 using Microsoft.EntityFrameworkCore;
 
@@ -18,6 +19,7 @@ builder.Services.AddDbContext<TableContext>(options =>
 
 builder.Services.AddDbContext<ToGoOrderContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
