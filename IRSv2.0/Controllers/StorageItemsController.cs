@@ -18,9 +18,8 @@ namespace IRSv2._0.Controllers
         // GET: StorageItems
         public IActionResult StorageItems()
         {
-            //var items = _context.StorageItems.ToList();
-            //return View(items);
-            return View();
+            var items = _context.StorageItems.ToList();
+            return View(items);
         }
 
         // GET: StorageItems/Details/{id}
@@ -38,13 +37,20 @@ namespace IRSv2._0.Controllers
         [HttpPost]
         public IActionResult AddItem(StorageItemsModel item)
         {
-            if (ModelState.IsValid)
+            StorageItemsModel storageItem = new StorageItemsModel
             {
-                _context.StorageItems.Add(item);
-                _context.SaveChanges();
-                return RedirectToAction("StorageItems");
-            }
-            return View(item);
+                ID = item.ID,
+                Name = item.Name,
+                Count = item.Count,
+            };
+
+
+            _context.StorageItems.Add(storageItem);
+            _context.SaveChanges();
+
+            StorageItems();
+
+            return RedirectToAction("StorageItems");
         }
 
         // POST: StorageItems/EditItem
@@ -61,6 +67,9 @@ namespace IRSv2._0.Controllers
             existingItem.Count = updatedItem.Count;
 
             _context.SaveChanges();
+
+            StorageItems();
+
             return RedirectToAction("StorageItems");
         }
 
@@ -76,6 +85,9 @@ namespace IRSv2._0.Controllers
 
             _context.StorageItems.Remove(item);
             _context.SaveChanges();
+
+            StorageItems();
+
             return RedirectToAction("StorageItems");
         }
     }

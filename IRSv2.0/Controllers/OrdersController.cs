@@ -67,6 +67,8 @@ namespace IRSv2._0.Controllers
                 _context.SaveChanges();
                 return RedirectToAction("Orders");
             }
+
+            Orders();
             return View(order);
         }
 
@@ -87,6 +89,9 @@ namespace IRSv2._0.Controllers
             existingOrder.Cooks = updatedOrder.Cooks;
 
             _context.SaveChanges();
+
+            Orders();
+
             return RedirectToAction("Orders");
         }
 
@@ -102,6 +107,9 @@ namespace IRSv2._0.Controllers
 
             _context.Orders.Remove(order);
             _context.SaveChanges();
+
+            Orders();
+
             return RedirectToAction("Orders");
         }
     }

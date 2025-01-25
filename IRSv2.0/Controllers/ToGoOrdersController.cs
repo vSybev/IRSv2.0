@@ -44,6 +44,9 @@ namespace IRSv2._0.Controllers
                 _context.SaveChanges();
                 return RedirectToAction("ToGoOrders");
             }
+
+            ToGoOrders();
+
             return View(order);
         }
 
@@ -65,6 +68,8 @@ namespace IRSv2._0.Controllers
             existingOrder.Products = updatedOrder.Products;
 
             _context.SaveChanges();
+
+            ToGoOrders();
             return RedirectToAction("ToGoOrders");
         }
 
@@ -80,6 +85,9 @@ namespace IRSv2._0.Controllers
 
             _context.ToGoOrders.Remove(order);
             _context.SaveChanges();
+
+            ToGoOrders();
+
             return RedirectToAction("ToGoOrders");
         }
     }

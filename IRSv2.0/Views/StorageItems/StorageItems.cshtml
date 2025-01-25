@@ -24,39 +24,18 @@
                     <th>Id</th>
                     <th>Name</th>
                     <th>Count</th>
-                    <th>Type</th>
-                    <th>Status</th>
-                    <th>Action</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>1234</td>
-                    <td>Пиле с Ориз</td>
-                    <td>2</td>
-                    <td>Food</td>
-                    <td>Done</td>
-                    <td><button class="action-btn">Edit</button></td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>4321</td>
-                    <td>Мусака</td>
-                    <td>1</td>
-                    <td>Drink</td>
-                    <td>Not done</td>
-                    <td><button class="action-btn">Edit</button></td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td>7557</td>
-                    <td>Таратор</td>
-                    <td>2</td>
-                    <td>Food</td>
-                    <td>Not done</td>
-                    <td><button class="action-btn">Edit</button></td>
-                </tr>
+                @for (int i = 0; i < Model.StorageItems.Count; i++)
+                {
+                    <tr>
+                        <td>@(i + 1)</td>
+                        <td>@Model.StorageItems[i].ID</td>
+                        <td>@Model.StorageItems[i].Name</td>
+                        <td>@Model.StorageItems[i].Count</td>
+                    </tr>
+                }>
             </tbody>
         </table>
     </div>

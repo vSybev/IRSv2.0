@@ -3,6 +3,8 @@ using IRSv2._0.Models;
 using IRSv2._0.Data.Contexts;
 using System.Linq;
 using System.Collections.Generic;
+using Microsoft.CodeAnalysis;
+using IRSv2._0.Models.Enums;
 
 namespace IRSv2._0.Controllers
 {
@@ -18,9 +20,8 @@ namespace IRSv2._0.Controllers
         // GET: Products
         public IActionResult Products()
         {
-            //var products = _context.Products.ToList();
-            //return View(products);
-            return View();
+            var products = _context.Products.ToList();
+            return View(products);
         }
 
         // GET: Products/Details/{id}
@@ -38,13 +39,24 @@ namespace IRSv2._0.Controllers
         [HttpPost]
         public IActionResult AddProduct(ProductsModel product)
         {
-            if (ModelState.IsValid)
+            // Create a new ManagersModel instance
+            ProductsModel productItem = new ProductsModel
             {
-                _context.Products.Add(product);
-                _context.SaveChanges();
-                return RedirectToAction("Products");
-            }
-            return View(product);
+                ID = product.ID,
+                Name = product.Name,
+                Description = product.Description,
+                Type = product.Type,
+                Price = product.Price,
+                Availability = product.Availability,
+                //Items = new List<StorageItemsModel>();
+            };
+
+            _context.Products.Add(productItem);
+            _context.SaveChanges();
+
+            Products();
+
+            return RedirectToAction("Products");
         }
 
         // POST: Products/EditProduct
@@ -65,6 +77,9 @@ namespace IRSv2._0.Controllers
             existingProduct.Items = updatedProduct.Items;
 
             _context.SaveChanges();
+
+            Products();
+
             return RedirectToAction("Products");
         }
 
@@ -80,6 +95,9 @@ namespace IRSv2._0.Controllers
 
             _context.Products.Remove(product);
             _context.SaveChanges();
+
+            Products();
+
             return RedirectToAction("Products");
         }
     }

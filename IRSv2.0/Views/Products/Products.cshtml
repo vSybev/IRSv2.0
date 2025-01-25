@@ -23,40 +23,25 @@
                     <th>#</th>
                     <th>Id</th>
                     <th>Name</th>
-                    <th>Count</th>
+                    <th>Description</th>
                     <th>Type</th>
-                    <th>Status</th>
-                    <th>Action</th>
+                    <th>Price</th>
+                    <th>Availability</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>1234</td>
-                    <td>Chicken</td>
-                    <td>2</td>
-                    <td>Food</td>
-                    <td>Done</td>
-                    <td><button class="action-btn">Edit</button></td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>4321</td>
-                    <td>Rice</td>
-                    <td>1</td>
-                    <td>Food</td>
-                    <td>Not done</td>
-                    <td><button class="action-btn">Edit</button></td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td>7557</td>
-                    <td>Yougurt</td>
-                    <td>2</td>
-                    <td>Food</td>
-                    <td>Not done</td>
-                    <td><button class="action-btn">Edit</button></td>
-                </tr>
+                @for (int i = 0; i < Model.Products.Count; i++)
+                {
+                    <tr>
+                        <td>@(i + 1)</td>
+                        <td>@Model.Products[i].ID</td>
+                        <td>@Model.Products[i].Name</td>
+                        <td>@Model.Products[i].Description</td>
+                        <td>@Model.Products[i].Type</td>
+                        <td>@Model.Products[i].Price</td>
+                        <td>@Model.Products[i].Availability</td>
+                    </tr>
+                }>
             </tbody>
         </table>
     </div>

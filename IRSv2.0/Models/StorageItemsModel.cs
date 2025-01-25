@@ -10,7 +10,6 @@ namespace IRSv2._0.Models
         public string Name { get; set; }
         public int Count { get; set; }
 
-        public StorageItemsModel() { }
         public StorageItemsModel(string id, string name, int count)
         {
             ID = id;
