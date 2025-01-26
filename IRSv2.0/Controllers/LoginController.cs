@@ -10,10 +10,10 @@ namespace IRSv2._0.Controllers
     {
         private readonly IRSDbContext _context;
 
-        public LoginController()
+        /*public LoginController()
         {
             _context = new IRSDbContext();
-        }
+        }*/
 
         [HttpGet]
         public IActionResult Login()

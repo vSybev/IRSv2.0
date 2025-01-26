@@ -8,10 +8,10 @@ namespace IRSv2._0.Controllers
     {
             private readonly IRSDbContext _context;
 
-            public RegisterController()
+            /*public RegisterController()
             {
                 _context = new IRSDbContext();
-            }
+            }*/
 
             public ActionResult Register()
             {

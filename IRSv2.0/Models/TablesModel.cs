@@ -9,11 +9,17 @@ namespace IRSv2._0.Models
         [Key]
         public string ID { get; set; }
         public TableStatus Status { get; set; }
-        [ForeignKey("Order")]
-        public string OrderId { get; set; }
-        public virtual OrdersModel Order { get; set; }
 
-    
+        [ForeignKey("Host")]
+        public string? HostID { get; set; }
+        public HostsModel Host { get; set; }
+
+        [ForeignKey("Waiter")]
+        public string? WaiterID { get; set; }
+        public WaitersModel Waiter { get; set; }
+
+        public OrdersModel Order { get; set; }
+
 
 
         public TablesModel()

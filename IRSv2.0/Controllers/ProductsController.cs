@@ -39,7 +39,7 @@ namespace IRSv2._0.Controllers
         [HttpPost]
         public IActionResult AddProduct(ProductsModel product)
         {
-            // Create a new ManagersModel instance
+            // Create a new Product instance
             ProductsModel productItem = new ProductsModel
             {
                 ID = product.ID,
@@ -48,7 +48,7 @@ namespace IRSv2._0.Controllers
                 Type = product.Type,
                 Price = product.Price,
                 Availability = product.Availability,
-                //Items = new List<StorageItemsModel>();
+                Items = product.Items
             };
 
             _context.Products.Add(productItem);

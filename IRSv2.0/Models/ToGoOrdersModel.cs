@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace IRSv2._0.Models
 {
@@ -10,6 +11,14 @@ namespace IRSv2._0.Models
         public string ReceiverName { get; set; }
         public string ReceiverAddress { get; set; }
         public int ReceiverPhoneNumber { get; set; }
+
+        [ForeignKey("Deliverer")]
+        public string? DelivererID { get; set; }
+        public DeliverersModel Deliverer { get; set; }
+
+        [ForeignKey("Host")]
+        public string? HostID { get; set; }
+        public HostsModel Host { get; set; }
         public virtual List<CooksModel> Cooks { get; set; }
         public virtual List<ProductsModel> Products { get; set; }
 

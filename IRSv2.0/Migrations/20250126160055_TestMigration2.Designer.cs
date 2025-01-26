@@ -11,20 +11,20 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace IRSv2._0.Migrations
 {
     [DbContext(typeof(IRSDbContext))]
-    [Migration("20250102155540_rootmigration")]
-    partial class rootmigration
+    [Migration("20250126160055_TestMigration2")]
+    partial class TestMigration2
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "9.0.0")
+                .HasAnnotation("ProductVersion", "9.0.1")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("CookOrder", b =>
+            modelBuilder.Entity("CooksModelOrdersModel", b =>
                 {
                     b.Property<string>("CooksID")
                         .HasColumnType("nvarchar(450)");
@@ -36,10 +36,10 @@ namespace IRSv2._0.Migrations
 
                     b.HasIndex("OrdersID");
 
-                    b.ToTable("CookOrder");
+                    b.ToTable("CooksOrders", (string)null);
                 });
 
-            modelBuilder.Entity("CookToGoOrder", b =>
+            modelBuilder.Entity("CooksModelToGoOrdersModel", b =>
                 {
                     b.Property<string>("CooksID")
                         .HasColumnType("nvarchar(450)");
@@ -51,10 +51,10 @@ namespace IRSv2._0.Migrations
 
                     b.HasIndex("ToGoOrdersID");
 
-                    b.ToTable("CookToGoOrder");
+                    b.ToTable("CooksToGoOrders", (string)null);
                 });
 
-            modelBuilder.Entity("IRSv2._0.Models.Cook", b =>
+            modelBuilder.Entity("IRSv2._0.Models.CooksModel", b =>
                 {
                     b.Property<string>("ID")
                         .HasColumnType("nvarchar(450)");
@@ -73,7 +73,7 @@ namespace IRSv2._0.Migrations
                     b.ToTable("Cooks");
                 });
 
-            modelBuilder.Entity("IRSv2._0.Models.Deliverer", b =>
+            modelBuilder.Entity("IRSv2._0.Models.DeliverersModel", b =>
                 {
                     b.Property<string>("ID")
                         .HasColumnType("nvarchar(450)");
@@ -92,7 +92,7 @@ namespace IRSv2._0.Migrations
                     b.ToTable("Deliverers");
                 });
 
-            modelBuilder.Entity("IRSv2._0.Models.Host", b =>
+            modelBuilder.Entity("IRSv2._0.Models.HostsModel", b =>
                 {
                     b.Property<string>("ID")
                         .HasColumnType("nvarchar(450)");
@@ -111,7 +111,7 @@ namespace IRSv2._0.Migrations
                     b.ToTable("Hosts");
                 });
 
-            modelBuilder.Entity("IRSv2._0.Models.Manager", b =>
+            modelBuilder.Entity("IRSv2._0.Models.ManagersModel", b =>
                 {
                     b.Property<string>("ID")
                         .HasColumnType("nvarchar(450)");
@@ -125,7 +125,7 @@ namespace IRSv2._0.Migrations
                     b.ToTable("Managers");
                 });
 
-            modelBuilder.Entity("IRSv2._0.Models.Order", b =>
+            modelBuilder.Entity("IRSv2._0.Models.OrdersModel", b =>
                 {
                     b.Property<string>("ID")
                         .HasColumnType("nvarchar(450)");
@@ -133,22 +133,27 @@ namespace IRSv2._0.Migrations
                     b.Property<double>("Price")
                         .HasColumnType("float");
 
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
                     b.Property<string>("TableID")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("WaiterID")
-                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("ID");
+
+                    b.HasIndex("TableID")
+                        .IsUnique()
+                        .HasFilter("[TableID] IS NOT NULL");
 
                     b.HasIndex("WaiterID");
 
                     b.ToTable("Orders");
                 });
 
-            modelBuilder.Entity("IRSv2._0.Models.Product", b =>
+            modelBuilder.Entity("IRSv2._0.Models.ProductsModel", b =>
                 {
                     b.Property<string>("ID")
                         .HasColumnType("nvarchar(450)");
@@ -164,14 +169,8 @@ namespace IRSv2._0.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("OrderID")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<double>("Price")
                         .HasColumnType("float");
-
-                    b.Property<string>("ToGoOrderID")
-                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Type")
                         .IsRequired()
@@ -179,14 +178,10 @@ namespace IRSv2._0.Migrations
 
                     b.HasKey("ID");
 
-                    b.HasIndex("OrderID");
-
-                    b.HasIndex("ToGoOrderID");
-
                     b.ToTable("Products");
                 });
 
-            modelBuilder.Entity("IRSv2._0.Models.StorageItem", b =>
+            modelBuilder.Entity("IRSv2._0.Models.StorageItemsModel", b =>
                 {
                     b.Property<string>("ID")
                         .HasColumnType("nvarchar(450)");
@@ -198,26 +193,17 @@ namespace IRSv2._0.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("ProductID")
-                        .HasColumnType("nvarchar(450)");
-
                     b.HasKey("ID");
-
-                    b.HasIndex("ProductID");
 
                     b.ToTable("StorageItems");
                 });
 
-            modelBuilder.Entity("IRSv2._0.Models.Table", b =>
+            modelBuilder.Entity("IRSv2._0.Models.TablesModel", b =>
                 {
                     b.Property<string>("ID")
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("HostID")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("OrderId")
-                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("Status")
@@ -230,14 +216,12 @@ namespace IRSv2._0.Migrations
 
                     b.HasIndex("HostID");
 
-                    b.HasIndex("OrderId");
-
                     b.HasIndex("WaiterID");
 
                     b.ToTable("Tables");
                 });
 
-            modelBuilder.Entity("IRSv2._0.Models.ToGoOrder", b =>
+            modelBuilder.Entity("IRSv2._0.Models.ToGoOrdersModel", b =>
                 {
                     b.Property<string>("ID")
                         .HasColumnType("nvarchar(450)");
@@ -271,7 +255,7 @@ namespace IRSv2._0.Migrations
                     b.ToTable("ToGoOrders");
                 });
 
-            modelBuilder.Entity("IRSv2._0.Models.Waiter", b =>
+            modelBuilder.Entity("IRSv2._0.Models.WaitersModel", b =>
                 {
                     b.Property<string>("ID")
                         .HasColumnType("nvarchar(450)");
@@ -293,134 +277,230 @@ namespace IRSv2._0.Migrations
                     b.ToTable("Waiters");
                 });
 
-            modelBuilder.Entity("CookOrder", b =>
+            modelBuilder.Entity("OrdersModelProductsModel", b =>
                 {
-                    b.HasOne("IRSv2._0.Models.Cook", null)
+                    b.Property<string>("OrdersID")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ProductsID")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("OrdersID", "ProductsID");
+
+                    b.HasIndex("ProductsID");
+
+                    b.ToTable("ProductsOrders", (string)null);
+                });
+
+            modelBuilder.Entity("ProductsModelStorageItemsModel", b =>
+                {
+                    b.Property<string>("ItemsID")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ProductsID")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("ItemsID", "ProductsID");
+
+                    b.HasIndex("ProductsID");
+
+                    b.ToTable("StorageItemsProducts", (string)null);
+                });
+
+            modelBuilder.Entity("ProductsModelToGoOrdersModel", b =>
+                {
+                    b.Property<string>("ProductsID")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ToGoOrdersID")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("ProductsID", "ToGoOrdersID");
+
+                    b.HasIndex("ToGoOrdersID");
+
+                    b.ToTable("ProductsToGoOrders", (string)null);
+                });
+
+            modelBuilder.Entity("CooksModelOrdersModel", b =>
+                {
+                    b.HasOne("IRSv2._0.Models.CooksModel", null)
                         .WithMany()
                         .HasForeignKey("CooksID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("IRSv2._0.Models.Order", null)
+                    b.HasOne("IRSv2._0.Models.OrdersModel", null)
                         .WithMany()
                         .HasForeignKey("OrdersID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("CookToGoOrder", b =>
+            modelBuilder.Entity("CooksModelToGoOrdersModel", b =>
                 {
-                    b.HasOne("IRSv2._0.Models.Cook", null)
+                    b.HasOne("IRSv2._0.Models.CooksModel", null)
                         .WithMany()
                         .HasForeignKey("CooksID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("IRSv2._0.Models.ToGoOrder", null)
+                    b.HasOne("IRSv2._0.Models.ToGoOrdersModel", null)
                         .WithMany()
                         .HasForeignKey("ToGoOrdersID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("IRSv2._0.Models.Cook", b =>
+            modelBuilder.Entity("IRSv2._0.Models.CooksModel", b =>
                 {
-                    b.HasOne("IRSv2._0.Models.Manager", null)
+                    b.HasOne("IRSv2._0.Models.ManagersModel", "Manager")
                         .WithMany("Cooks")
-                        .HasForeignKey("ManagerID");
+                        .HasForeignKey("ManagerID")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.Navigation("Manager");
                 });
 
-            modelBuilder.Entity("IRSv2._0.Models.Deliverer", b =>
+            modelBuilder.Entity("IRSv2._0.Models.DeliverersModel", b =>
                 {
-                    b.HasOne("IRSv2._0.Models.Manager", null)
+                    b.HasOne("IRSv2._0.Models.ManagersModel", "Manager")
                         .WithMany("Deliverers")
-                        .HasForeignKey("ManagerID");
+                        .HasForeignKey("ManagerID")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.Navigation("Manager");
                 });
 
-            modelBuilder.Entity("IRSv2._0.Models.Host", b =>
+            modelBuilder.Entity("IRSv2._0.Models.HostsModel", b =>
                 {
-                    b.HasOne("IRSv2._0.Models.Manager", null)
+                    b.HasOne("IRSv2._0.Models.ManagersModel", "Manager")
                         .WithMany("Hosts")
-                        .HasForeignKey("ManagerID");
+                        .HasForeignKey("ManagerID")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.Navigation("Manager");
                 });
 
-            modelBuilder.Entity("IRSv2._0.Models.Order", b =>
+            modelBuilder.Entity("IRSv2._0.Models.OrdersModel", b =>
                 {
-                    b.HasOne("IRSv2._0.Models.Waiter", null)
+                    b.HasOne("IRSv2._0.Models.TablesModel", "Table")
+                        .WithOne("Order")
+                        .HasForeignKey("IRSv2._0.Models.OrdersModel", "TableID")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("IRSv2._0.Models.WaitersModel", "Waiter")
                         .WithMany("Orders")
                         .HasForeignKey("WaiterID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.Navigation("Table");
+
+                    b.Navigation("Waiter");
                 });
 
-            modelBuilder.Entity("IRSv2._0.Models.Product", b =>
+            modelBuilder.Entity("IRSv2._0.Models.TablesModel", b =>
                 {
-                    b.HasOne("IRSv2._0.Models.Order", null)
-                        .WithMany("Products")
-                        .HasForeignKey("OrderID");
-
-                    b.HasOne("IRSv2._0.Models.ToGoOrder", null)
-                        .WithMany("Products")
-                        .HasForeignKey("ToGoOrderID");
-                });
-
-            modelBuilder.Entity("IRSv2._0.Models.StorageItem", b =>
-                {
-                    b.HasOne("IRSv2._0.Models.Product", null)
-                        .WithMany("Items")
-                        .HasForeignKey("ProductID");
-                });
-
-            modelBuilder.Entity("IRSv2._0.Models.Table", b =>
-                {
-                    b.HasOne("IRSv2._0.Models.Host", null)
+                    b.HasOne("IRSv2._0.Models.HostsModel", "Host")
                         .WithMany("Sector")
-                        .HasForeignKey("HostID");
+                        .HasForeignKey("HostID")
+                        .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("IRSv2._0.Models.Order", "Order")
-                        .WithMany()
-                        .HasForeignKey("OrderId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("IRSv2._0.Models.Waiter", null)
+                    b.HasOne("IRSv2._0.Models.WaitersModel", "Waiter")
                         .WithMany("Sector")
-                        .HasForeignKey("WaiterID");
+                        .HasForeignKey("WaiterID")
+                        .OnDelete(DeleteBehavior.Cascade);
 
-                    b.Navigation("Order");
+                    b.Navigation("Host");
+
+                    b.Navigation("Waiter");
                 });
 
-            modelBuilder.Entity("IRSv2._0.Models.ToGoOrder", b =>
+            modelBuilder.Entity("IRSv2._0.Models.ToGoOrdersModel", b =>
                 {
-                    b.HasOne("IRSv2._0.Models.Deliverer", null)
+                    b.HasOne("IRSv2._0.Models.DeliverersModel", "Deliverer")
                         .WithMany("ToGoOrders")
-                        .HasForeignKey("DelivererID");
+                        .HasForeignKey("DelivererID")
+                        .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("IRSv2._0.Models.Host", null)
+                    b.HasOne("IRSv2._0.Models.HostsModel", "Host")
                         .WithMany("ToGoOrders")
-                        .HasForeignKey("HostID");
+                        .HasForeignKey("HostID")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.Navigation("Deliverer");
+
+                    b.Navigation("Host");
                 });
 
-            modelBuilder.Entity("IRSv2._0.Models.Waiter", b =>
+            modelBuilder.Entity("IRSv2._0.Models.WaitersModel", b =>
                 {
-                    b.HasOne("IRSv2._0.Models.Manager", null)
+                    b.HasOne("IRSv2._0.Models.ManagersModel", "Manager")
                         .WithMany("Waiters")
-                        .HasForeignKey("ManagerID");
+                        .HasForeignKey("ManagerID")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.Navigation("Manager");
                 });
 
-            modelBuilder.Entity("IRSv2._0.Models.Deliverer", b =>
+            modelBuilder.Entity("OrdersModelProductsModel", b =>
+                {
+                    b.HasOne("IRSv2._0.Models.OrdersModel", null)
+                        .WithMany()
+                        .HasForeignKey("OrdersID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("IRSv2._0.Models.ProductsModel", null)
+                        .WithMany()
+                        .HasForeignKey("ProductsID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("ProductsModelStorageItemsModel", b =>
+                {
+                    b.HasOne("IRSv2._0.Models.StorageItemsModel", null)
+                        .WithMany()
+                        .HasForeignKey("ItemsID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("IRSv2._0.Models.ProductsModel", null)
+                        .WithMany()
+                        .HasForeignKey("ProductsID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("ProductsModelToGoOrdersModel", b =>
+                {
+                    b.HasOne("IRSv2._0.Models.ProductsModel", null)
+                        .WithMany()
+                        .HasForeignKey("ProductsID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("IRSv2._0.Models.ToGoOrdersModel", null)
+                        .WithMany()
+                        .HasForeignKey("ToGoOrdersID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("IRSv2._0.Models.DeliverersModel", b =>
                 {
                     b.Navigation("ToGoOrders");
                 });
 
-            modelBuilder.Entity("IRSv2._0.Models.Host", b =>
+            modelBuilder.Entity("IRSv2._0.Models.HostsModel", b =>
                 {
                     b.Navigation("Sector");
 
                     b.Navigation("ToGoOrders");
                 });
 
-            modelBuilder.Entity("IRSv2._0.Models.Manager", b =>
+            modelBuilder.Entity("IRSv2._0.Models.ManagersModel", b =>
                 {
                     b.Navigation("Cooks");
 
@@ -431,22 +511,13 @@ namespace IRSv2._0.Migrations
                     b.Navigation("Waiters");
                 });
 
-            modelBuilder.Entity("IRSv2._0.Models.Order", b =>
+            modelBuilder.Entity("IRSv2._0.Models.TablesModel", b =>
                 {
-                    b.Navigation("Products");
+                    b.Navigation("Order")
+                        .IsRequired();
                 });
 
-            modelBuilder.Entity("IRSv2._0.Models.Product", b =>
-                {
-                    b.Navigation("Items");
-                });
-
-            modelBuilder.Entity("IRSv2._0.Models.ToGoOrder", b =>
-                {
-                    b.Navigation("Products");
-                });
-
-            modelBuilder.Entity("IRSv2._0.Models.Waiter", b =>
+            modelBuilder.Entity("IRSv2._0.Models.WaitersModel", b =>
                 {
                     b.Navigation("Orders");
 

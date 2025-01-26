@@ -63,7 +63,7 @@ namespace IRSv2._0.Controllers
             }
 
             existingTable.Status = updatedTable.Status;
-            existingTable.OrderId = updatedTable.OrderId;
+            //existingTable.OrderId = updatedTable.OrderId;
 
             _context.SaveChanges();
             return RedirectToAction("Tables");

@@ -37,13 +37,7 @@ namespace IRSv2._0.Controllers
         [HttpPost]
         public IActionResult AddItem(StorageItemsModel item)
         {
-            StorageItemsModel storageItem = new StorageItemsModel
-            {
-                ID = item.ID,
-                Name = item.Name,
-                Count = item.Count,
-            };
-
+            StorageItemsModel storageItem = new StorageItemsModel(item.ID, item.Name, item.Count);
 
             _context.StorageItems.Add(storageItem);
             _context.SaveChanges();

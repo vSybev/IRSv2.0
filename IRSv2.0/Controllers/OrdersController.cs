@@ -4,6 +4,7 @@ using IRSv2._0.Data.Contexts;
 using System.Linq;
 using System.Collections.Generic;
 using IRSv2._0.Data;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace IRSv2._0.Controllers
 {
@@ -27,10 +28,10 @@ namespace IRSv2._0.Controllers
         new ProductsModel { ID = "P2", Name = "Product2" }
     }
         };
-        public OrdersController()
+        /*public OrdersController()
         {
             _context = new IRSDbContext();
-        }
+        }*/
 
         // GET: Orders
         public IActionResult Orders()
@@ -63,6 +64,16 @@ namespace IRSv2._0.Controllers
         {
             if (ModelState.IsValid)
             {
+                OrdersModel orderToAdd = new OrdersModel
+                {
+                    ID = order.ID,            
+                    Price = order.Price,
+                    WaiterID = order.WaiterID,
+                    TableID = order.TableID,
+                    Products = order.Products,
+                    Cooks = order.Cooks
+                };
+
                 _context.Orders.Add(order);
                 _context.SaveChanges();
                 return RedirectToAction("Orders");

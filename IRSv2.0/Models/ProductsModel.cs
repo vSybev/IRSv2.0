@@ -14,6 +14,9 @@ namespace IRSv2._0.Models
         public double Price { get; set; }
         public ProductAvailability Availability { get; set; }
         public virtual List<StorageItemsModel> Items { get; set; }
+        public List<OrdersModel> Orders { get; set; }
+        public List<ToGoOrdersModel> ToGoOrders { get; set; }
+        
 
         public ProductsModel()
         {
